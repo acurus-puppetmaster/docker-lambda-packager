@@ -1,5 +1,9 @@
+dist: xenial
+
 services:
   - docker
+
 install: true
+
 script:
   - docker build -t lambda-packager:latest .
