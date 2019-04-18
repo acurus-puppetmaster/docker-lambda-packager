@@ -3,7 +3,6 @@ FROM amazonlinux:1
 MAINTAINER Alexis N-o "alexis@henaut.net"
 
 ENV DEFAULT_USER=myrmex
-ENV NODE_VERSION_6 6.10.3
 ENV NODE_VERSION_8 8.10.0
 ENV PYTHON_VERSION_3_6 3.6.8
 ENV PYTHON_VERSION_3_7 3.7.3
@@ -11,16 +10,8 @@ ENV PYTHON_VERSION_3_7 3.7.3
 # Install gcc add utilities to manage users and permissions
 RUN yum install -y gcc-c++ util-linux shadow-utils zlib-devel openssl-devel libffi-devel
 
-# Install node v6 and node v8 as commands "node6" and "node8"
-# Command "node" defaults to v8
+# Install node v8
 RUN cd /opt &&\
-    curl -O https://nodejs.org/dist/v${NODE_VERSION_6}/node-v${NODE_VERSION_6}-linux-x64.tar.gz &&\
-    tar xvzf node-v${NODE_VERSION_6}-linux-x64.tar.gz &&\
-    ln -s /opt/node-v${NODE_VERSION_6}-linux-x64/bin/node /usr/local/bin/node6 &&\
-    ln -s /opt/node-v${NODE_VERSION_6}-linux-x64/bin/node /usr/local/bin/node &&\
-    ln -s /opt/node-v${NODE_VERSION_6}-linux-x64/bin/npm /usr/local/bin/npm &&\
-    /opt/node-v${NODE_VERSION_6}-linux-x64/bin/npm install -g npm@4 &&\
-    rm /usr/local/bin/node /usr/local/bin/npm &&\
     curl -O https://nodejs.org/dist/v${NODE_VERSION_8}/node-v${NODE_VERSION_8}-linux-x64.tar.gz &&\
     tar xvzf node-v${NODE_VERSION_8}-linux-x64.tar.gz &&\
     ln -s /opt/node-v${NODE_VERSION_8}-linux-x64/bin/node /usr/local/bin/node8 &&\

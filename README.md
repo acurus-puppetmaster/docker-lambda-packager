@@ -9,7 +9,7 @@ A common solution to this problem is to build the package on an EC2 instance usi
 deploy it in Amazon Lambda. Building serverless applications, it is ironic to be obliged to use an EC2 server to deploy code.
 
 This docker image is based on the [Amazon Linux 1](https://hub.docker.com/_/amazonlinux/) image and contains `gcc`,
-`python 2.7`, `python 3.6`, `python 3.7`, `pip`, `node 6.10`, `node 8.10` to create packages for Amazon Lambda.
+`python 2.7`, `python 3.6`, `python 3.7`, `pip`, `node 8.10` to create packages for Amazon Lambda.
 
 Using the docker image `myrmex/lambda-packager`, you can avoid errors like these during execution in Amazon Lambda:
 
@@ -25,7 +25,7 @@ Module version mismatch. Expected 46, got 48.
 
 You can use a docker volume to mount the code of the Lambda in a container. The directory where `npm install` or
 `pip install` is executed inside the container is `/data`. By default, the installation will be performed for node
-6.10.
+8.10.
 
 ```bash
 docker run -v `pwd`:/data myrmex/lambda-packager
@@ -49,18 +49,15 @@ docker run -e HOST_UID=`id -u` -e HOST_GID=`id -g` -v `pwd`:/data myrmex/lambda-
 
 ### Selecting the runtime
 
-The `RUNTIME` environment variable allows to choose the runtime.
+The following previously supported runtimes have now been deprecated
+* Node.js 4.3 - April 30, 2019
+* Node.js 6.10 - May 30, 2019
 
+The `RUNTIME` environment variable allows to choose the runtime.
 
 #### Node 8.10
 
 Node 8.10 is the default runtime and does not require any special configuration.
-
-#### Node 6.10
-
-```bash
-docker run -e RUNTIME=node6 -v `pwd`:/data myrmex/lambda-packager
-```
 
 #### Python 3.7
 

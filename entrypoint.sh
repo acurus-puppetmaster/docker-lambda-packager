@@ -10,12 +10,7 @@ if [ `whoami` == "root" ]; then
         echo "Using python v3.6 runtime"
         ln -sf /opt/python-${PYTHON_VERSION_3_6}/bin/python3 /usr/bin/python3
         ln -sf /opt/python-${PYTHON_VERSION_3_6}/bin/pip3 /usr/bin/pip3
-    elif [ "$RUNTIME" == "node6" ]; then
-        echo "Using node v6 runtime"
-        rm /usr/local/bin/node /usr/local/bin/npm
-        ln -sf /opt/node-v${NODE_VERSION_6}-linux-x64/bin/node /usr/local/bin/node
-        ln -sf /opt/node-v${NODE_VERSION_6}-linux-x64/bin/npm /usr/local/bin/npm
-    else
+    elif [ "$RUNTIME" == "node" ] || [ "$RUNTIME" == "node6" ]; then
         echo "Using node v8 runtime"
     fi
 
